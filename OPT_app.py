@@ -77,7 +77,6 @@ try:
                 continue
 
             points_itm = list(zip(cluster_df['x'], cluster_df['y']))
-
             if len(points_itm) < 4:
                 st.write(f"Skipping cluster {cluster_id} (less than 4 points)")
                 continue
@@ -177,9 +176,11 @@ try:
         st.subheader("Field Map")
         st_data = st_folium(m, width=900, height=600)
 
-        if hulls_info:
-            st.subheader("Areas of Detected Field Hulls (in Gunthas)")
-            st.table(pd.DataFrame(hulls_info))
+        st.subheader("Areas of Detected Field Hulls (in Gunthas)")
+        df_hulls = pd.DataFrame(hulls_info)
+        if not df_hulls.empty:
+            df_hulls = df_hulls.sort_values(by="Area (gunthas)", ascending=False).reset_index(drop=True)
+            st.dataframe(df_hulls, use_container_width=True)
         else:
             st.info("No valid field hulls detected to show areas.")
 
