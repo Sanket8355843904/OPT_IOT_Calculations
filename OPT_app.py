@@ -64,7 +64,7 @@ try:
         st.write("Clustering and labeling complete.")
 
         union_hull = None
-        alpha = 0.08
+        alpha = 0.08  # Controls level of concavity (lower = more concave). Try values between 0.01 and 1.0
         hulls_info = []
 
         for cluster_id in df['cluster'].unique():
