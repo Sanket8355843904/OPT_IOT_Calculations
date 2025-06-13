@@ -112,11 +112,10 @@ if uploaded_file:
             latlon_coords = [transformer_inv.transform(x, y)[::-1] for x, y in polygon.exterior.coords]
             area_gunthas = polygon.area / 101.171367
             folium.Polygon(locations=latlon_coords, color='green', fill=True, fill_opacity=0.3,
-                           popup=f"Area: {area_gunthas:.2f} gunthas",
-                           tooltip=f"Area: {area_gunthas:.2f} gunthas").add_to(m)
+                           tooltip=f"Hull_{hull_count}").add_to(m)
 
             centroid = transformer_inv.transform(*polygon.centroid.coords[0])[::-1]
-            folium.Marker(centroid, popup=f"Hull_{hull_count}: {area_gunthas:.2f} gunthas").add_to(m)
+            folium.Marker(centroid, popup=f"Hull_{hull_count}").add_to(m)
 
             hulls_info.append({"Hull": f"Hull_{hull_count}", "Area (gunthas)": round(area_gunthas, 2)})
 
