@@ -43,7 +43,7 @@ if uploaded_file:
 
     # Post-processing: Correct road points inside field clusters
     tree = BallTree(coords, metric='euclidean')
-    radius = 10
+    radius = 15
     indices = tree.query_radius(coords, r=radius)
 
     def corrected_label(i):
@@ -58,7 +58,7 @@ if uploaded_file:
 
     # Create alpha shapes
     union_hull = None
-    alpha = 0.08
+    alpha = 0.1
     hulls_info = []
 
     for cluster_id in df['cluster'].unique():
